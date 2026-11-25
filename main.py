@@ -3,7 +3,7 @@ import pandas as pd
 from pydantic import BaseModel, Field
 import joblib
 from fastapi.middleware.cors import CORSMiddleware
-
+from fastapi.responses import FileResponse
 
 app = FastAPI()
 
@@ -51,3 +51,8 @@ def predict(features: Features):
     return {
         "Predicted_room_type": prediction[0],
         "Probability": probability.tolist()[0]}
+
+
+@app.get("/favicon.ico")
+async def favicon():
+    return FileResponse("favicon.ico")
